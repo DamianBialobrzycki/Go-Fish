@@ -81,6 +81,7 @@
             this.listHand.Name = "listHand";
             this.listHand.Size = new System.Drawing.Size(165, 446);
             this.listHand.TabIndex = 4;
+            this.listHand.DoubleClick += new System.EventHandler(this.buttonAsk_Click);
             // 
             // textProgress
             // 
