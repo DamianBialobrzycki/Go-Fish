@@ -30,12 +30,61 @@ namespace Go_Fish
         {
             cards.Add(cardToAdd);
         }
+        public Card Peek(int cardNumber)
+        {
+            return cards[cardNumber];
+        }
+
+        public Card Deal()
+        {
+            return Deal(0);
+        }
 
         public Card Deal(int index)
         {
             Card CardToDeal = cards[index];
             cards.RemoveAt(index);
             return CardToDeal;
+        }
+
+        public bool ContainsValue(Values value)
+        {
+            foreach (Card card in cards)
+            {
+                if (card.Value == value)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public Deck PullOutValues(Values value)
+        {
+            Deck deckToReturn = new Deck(new Card[] { });
+
+            for(int i = cards.Count - 1; i>= 0; i--)
+            {
+                if (cards[i].Value == value)
+                    deckToReturn.Add(Deal(i));
+            }
+
+            return deckToReturn;
+        }
+
+        public bool HasBook(Values value)
+        {
+            int NumberOfCards = 0;
+
+            foreach(Card card in cards)
+            {
+                if (card.Value == value)
+                    NumberOfCards++;
+            }
+
+            if (NumberOfCards == 4)
+                return true;
+            else
+                return false;
         }
 
         public void Shuffle()
@@ -60,9 +109,9 @@ namespace Go_Fish
             return CardNames;
         }
 
-        public void Sort()
+        public void SortByValue()
         {
-            cards.Sort(new CardComparer_bySuit());
+            cards.Sort(new CardComparer_byValue());
         }
     }
 }
